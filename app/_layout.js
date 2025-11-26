@@ -1,21 +1,20 @@
 import { Stack } from "expo-router";
+import { useColorScheme } from "react-native";
+import { PermissionsProvider } from "../utils/PermissionsContext";
+
+function RootStack() {
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   return (
-    <>
-      {/* Root stack controls screen transitions for the whole app */}
-      <Stack>
-        {/* The (tabs) group is one Stack screen with its own tab navigator */}
-        <Stack.Screen
-          name="(tabs)"
-          options={{ headerShown: false }}
-        />
-        {/* This screen is pushed on top of tabs when you navigate to /details */}
-        <Stack.Screen
-          name="details"
-          options={{ title: "Details" }}
-        />
-      </Stack>
-    </>
+    <PermissionsProvider>
+      <RootStack />
+    </PermissionsProvider>
   );
 }
