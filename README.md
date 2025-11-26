@@ -1,16 +1,16 @@
-# 📱 Emotion & Video Logging App (Expo Router + Expo Go)
+# 📱 Emotion & Video Logging App
 
 A mobile application built with **Expo** and **Expo Router**, designed for **collecting short video diaries**, **emotion self-reports**, **basic GPS metadata**, and **daily reminder notifications**.
 
 This app is intended for **behavioral science**, **affective computing**, or **human-subject research**, enabling participants to submit three emotion-logging sessions per day.
 
----
+
 ## 🔗 Demo
 
 If you want to preview a deployed build:
 
 https://expo.dev/accounts/bearbearcookies/projects/expo-router-mwe/builds/783657af-19a8-40b9-86c4-4c56ab391b88
----
+
 ## ✨ Features Overview
 
 ### 🎥 1. Video Recording With Guided Flow
