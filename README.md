@@ -22,13 +22,13 @@ https://expo.dev/accounts/bearbearcookies/projects/expo-router-mwe/builds/783657
 - Exported video is saved locally within session data  
 - Emotion questionnaire shown after each recording
 
----
+
 
 ### 😊 2. Emotion Questionnaire
 After each video, the user selects one of five emotions (emoji-based UI).  
 Collected data is shown in **History** and **Statistics**.
 
----
+
 
 ### 🕒 3. Daily Notifications (Morning / Midday / Evening)
 - First-time users configure **three daily reminder times**
@@ -37,7 +37,7 @@ Collected data is shown in **History** and **Statistics**.
 - Uses **local scheduled notifications** (`expo-notifications`)
   - ⚠ Expo Go supports *local notifications only*, not push notifications
 
----
+
 
 ### 📍 4. Metadata Storage
 Each session stores:
@@ -51,7 +51,7 @@ Each session stores:
 
 Saved using AsyncStorage.
 
----
+
 
 ### 📊 5. History & Statistics
 
@@ -68,7 +68,7 @@ Saved using AsyncStorage.
 
 CSV export uses `expo-file-system/legacy` for consistent Expo Go compatibility.
 
----
+
 
 ### ⚙️ 6. Settings Page
 Includes:
@@ -82,7 +82,7 @@ Includes:
 - Open-source licenses
 - Clear all local data
 
----
+
 
 ## 🧩 App Architecture
 ```bash
@@ -109,7 +109,7 @@ Built with:
 - `expo-file-system`
 - `@react-native-async-storage/async-storage`
 
----
+
 
 ## 🧭 User Flow
 
@@ -122,7 +122,7 @@ Built with:
 7. Session saved into History and Statistics
 8. Daily reminders prompt the user to record 3 times per day
 
----
+
 
 ## 🚀 How to Run Locally
 
@@ -149,15 +149,15 @@ npx expo start --tunnel
 
 - All camera, file system, and location features function normally
 
----
+
 
 ## 📦 CSV Export Format
 
 Example fields:
 
-sessionId|	startTime|	endTime|	duration|	emotion|	latitude|	longitude|	videoUri|
+| sessionId | startTime | endTime | duration | emotion | latitude | longitude | videoUri |
+|-----------|-----------|---------|----------|---------|-----------|-----------|----------|
 
----
 
 ## 🛠 Development Notes
 ### CameraView Overlays
