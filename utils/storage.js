@@ -109,3 +109,50 @@ export const formatSessionForCSV = (session) => {
     video_file_path: session.videoUri || 'N/A',
   };
 };
+
+// ⚠️ 重要：請換成你 Render 部署後的真正網址，例如 https://emogo-backend.onrender.com
+const API_URL = "https://emogo-backend-bearbearcookies.onrender.com/"; 
+
+export const uploadSessionToBackend = async (session) => {
+  try {
+    const formData = new FormData();
+
+    // 1. 填入資料 (Key 必須對應 Backend 的 main.py)
+    formData.append('sessionId', session.sessionId);
+    formData.append('startTime', session.startTime);
+    formData.append('emotionValue', String(session.emotionValue)); // 轉成字串比較保險
+    formData.append('duration', String(session.duration));
+    
+    if (session.latitude) formData.append('latitude', String(session.latitude));
+    if (session.longitude) formData.append('longitude', String(session.longitude));
+
+    // 2. 處理影片檔案
+    // React Native 的 FormData 處理檔案需要特殊的格式
+    const filename = session.videoUri.split('/').pop();
+    const match = /\.(\w+)$/.exec(filename);
+    const type = match ? `video/${match[1]}` : `video/mp4`;
+
+    formData.append('file', {
+      uri: session.videoUri,
+      name: filename,
+      type: type,
+    });
+
+    // 3. 發送請求
+    const response = await fetch(`${API_URL}/upload`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const result = await response.json();
+    console.log('Upload success:', result);
+    return true;
+
+  } catch (error) {
+    console.error('Upload failed:', error);
+    return false;
+  }
+};
