@@ -18,7 +18,7 @@ import * as Location from "expo-location";
 import * as Notifications from "expo-notifications";
 import { Ionicons } from "@expo/vector-icons";
 import { usePermissions } from "../../utils/PermissionsContext";
-import { saveSession, generateSessionId } from "../../utils/storage";
+import { saveSession, generateSessionId,uploadSessionToBackend } from "../../utils/storage";
 
 const RECORDING_DURATION = 60;
 
@@ -261,9 +261,17 @@ export default function HomeScreen() {
 
     if (settings.storageEnabled) {
       try {
+        // 1. 先存到手機本地
         const saved = await saveSession(finalSessionData);
+        
         if (saved) {
-          console.log("Session saved successfully");
+          console.log("Session saved locally");
+          
+          // 👇👇👇 [新增] 這裡就是缺少的關鍵步驟！開始上傳到 Render 👇👇👇
+          console.log("🚀 Starting upload to Backend...");
+          // 不用加 await，讓它在背景慢慢傳就好，不要卡住使用者的介面
+          uploadSessionToBackend(saved); 
+          // 👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆👆
         }
       } catch (error) {
         console.error("Save error:", error);
@@ -271,6 +279,7 @@ export default function HomeScreen() {
       }
     }
 
+    // 後面保持原本的邏輯 (First Run 設定)
     if (isFirstRun) {
       setTempNotificationTimes({
         morning: { hour: 9, minute: 0 },
@@ -279,7 +288,7 @@ export default function HomeScreen() {
       });
       setShowNotificationSetup(true);
     } else {
-      Alert.alert("Success", "Session saved successfully!");
+      Alert.alert("Success", "Session saved (and uploading)!");
       fullReset();
     }
   };
