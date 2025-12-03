@@ -111,7 +111,7 @@ export const formatSessionForCSV = (session) => {
 };
 
 // ⚠️ 重要：請換成你 Render 部署後的真正網址，例如 https://emogo-backend.onrender.com
-const API_URL = "https://emogo-backend-bearbearcookies.onrender.com/"; 
+const API_URL = "https://emogo-backend-bearbearcookies.onrender.com"; 
 
 export const uploadSessionToBackend = async (session) => {
   try {
